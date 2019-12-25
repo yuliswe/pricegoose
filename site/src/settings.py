@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -33,7 +33,6 @@ ALLOWED_HOSTS = [
 
 # Application definition
 DROPPIE_APPS = [
-    'src.web.helloworld',
     'src.common',
 ]
 
@@ -51,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',  # 提供网站css, js
     'django_extensions',  # 提供manage.py runscript
     # https://django-extensions.readthedocs.io/en/latest/index.html
+    'rest_framework',
+    # https://www.django-rest-framework.org/
 ] + DROPPIE_APPS
 
 MIGRATION_MODULES_ROOT = Path('/root/migrations')
@@ -79,7 +80,7 @@ ROOT_URLCONF = 'src.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': BASE_DIR.glob('**/templates'),
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

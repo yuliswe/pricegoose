@@ -4,8 +4,6 @@ services:
   db:
     build: ./db
     hostname: droppie-db
-    ports:
-      - 5432:5432
 
   site:
     build: ./site

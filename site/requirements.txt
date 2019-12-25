@@ -1,5 +1,4 @@
 psycopg2-binary>=2.7.7,<3 # django dependency
-psycopg2 # django dependency
 Django>=2.1.5,<3
 djangorestframework
 django-extensions
