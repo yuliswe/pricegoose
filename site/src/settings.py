@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from pathlib import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,15 +26,20 @@ SECRET_KEY = '=)j#hxj%&js=qd4xc_sxl1!g--@fn1n0d8ptm^c40l#!@y-h7h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+]
 
 # Application definition
 DROPPIE_APPS = [
     'src.web.helloworld',
+    'src.common',
 ]
 
-# Application definition
+AUTH_USER_MODEL = 'common.User'
 
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.auth',  # 提供authentication
     # https://docs.djangoproject.com/en/2.2/ref/contrib/contenttypes
@@ -46,6 +52,17 @@ INSTALLED_APPS = [
     'django_extensions',  # 提供manage.py runscript
     # https://django-extensions.readthedocs.io/en/latest/index.html
 ] + DROPPIE_APPS
+
+MIGRATION_MODULES_ROOT = Path('/root/migrations')
+MIGRATION_MODULES = {
+    app: f'migrations.{app}' for app in DROPPIE_APPS
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
