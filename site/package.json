@@ -1,0 +1,14 @@
+{
+  "name": "droppie",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/YLiLarry/droppie.git",
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^3.7.4",
+    "webdriverio": "^5.18.0",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10"
+  }
+}

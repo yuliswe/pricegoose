@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  db:
+    build: ./db
+    hostname: droppie-db
+    ports:
+      - 5432:5432
+
+  site:
+    build: ./site
+    hostname: droppie-site
+    volumes:
+      - ./site:/root/site:ro
+    ports:
+      - "8080:80"
+    depends_on:
+      - db

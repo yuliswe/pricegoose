@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+service postgresql start
+until wait-for-it localhost:5432 && python3.7 manage.py runserver 0.0.0.0:80; do
+sleep 3
+echo starting server...
+done

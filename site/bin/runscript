@@ -1,0 +1,5 @@
+#!/bin/bash
+scriptfile="$1"
+shift 1
+echo python3.7 ${SITE_ROOT}/manage.py runscript "$scriptfile" --script-args $@
+python3.7 ${SITE_ROOT}/manage.py runscript "$scriptfile" --script-args $@
