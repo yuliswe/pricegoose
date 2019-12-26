@@ -5,7 +5,7 @@ from .item import Item
 
 class Currency(IntEnum):
     cad = 1
-    usd = 1
+    usd = 2
 
 
 class Price(models.Model):
