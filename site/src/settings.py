@@ -56,7 +56,7 @@ INSTALLED_APPS = [
 
 MIGRATION_MODULES_ROOT = Path('/root/migrations')
 MIGRATION_MODULES = {
-    app: f'migrations.{app}' for app in DROPPIE_APPS
+    'common': 'migrations.common'
 }
 
 REST_FRAMEWORK = {
