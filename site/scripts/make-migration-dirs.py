@@ -5,6 +5,6 @@ def run(*args):
     settings.MIGRATION_MODULES_ROOT.mkdir(exist_ok=True)
     (settings.MIGRATION_MODULES_ROOT / '__init__.py').touch(exist_ok=True)
 
-    for app in settings.DROPPIE_APPS:
+    for app in settings.MIGRATION_MODULES.keys():
         (settings.MIGRATION_MODULES_ROOT / app).mkdir(exist_ok=True)
         (settings.MIGRATION_MODULES_ROOT / app / '__init__.py').touch(exist_ok=True)
