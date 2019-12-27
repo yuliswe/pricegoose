@@ -77,6 +77,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'src.urls'
 
+STATIC_URL = '/static/'
+STATIC_ROOT = '/root/var/collectstatic'
+STATICFILES_DIRS = [
+    BASE_DIR / 'web' / 'static',
+    '/root/var/static',
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

@@ -1,0 +1,22 @@
+/*
+    Gap property on flex is not currently well supported,
+    and here is a workaround.
+    You can check the current state of support here:
+        https://caniuse.com/#feat=flexbox-gap
+*/
+@mixin fix-flex-gap($row-gap, $col-gap) {
+    margin-left: -$col-gap;
+    margin-bottom: -$row-gap;
+
+    &>* {
+        margin-left: $col-gap;
+        margin-bottom: $row-gap;
+    }
+}
+
+@mixin multiline-clamp($nrows) {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $nrows;
+}

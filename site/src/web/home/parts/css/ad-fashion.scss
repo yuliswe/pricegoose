@@ -1,0 +1,15 @@
+.ad-fashion {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 3rem;
+    >* {
+        width: 100%;
+    }
+    .card {
+        display: grid;
+
+        img {
+            max-width: 100%;
+        }
+    }
+}

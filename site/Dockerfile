@@ -35,8 +35,8 @@ RUN mkdir /root/var
 WORKDIR /root/var
 COPY requirements.txt .
 RUN python3.7 -m pip install -r requirements.txt
-COPY package.json .
-COPY yarn.lock .
+COPY src/web/package.json .
+COPY src/web/yarn.lock .
 RUN yarn install --dev --modules-folder ${NODE_PATH}
 # copy source
 COPY bin /root/bin
