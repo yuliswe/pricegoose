@@ -5,7 +5,7 @@
     <head>
         <title>
             {% block title %}
-            Droppie - Fashion with Lowest Price
+            Droppie - Track Lowest Price for Fashion &amp; Electronics
             {% endblock title %}
         </title>
 
@@ -37,10 +37,10 @@
     </head>
 
     <body class="{% block body_class %} base {% endblock %} {% if not user.is_authenticated %}js-user-anonymous{% endif %}">
-    {% include 'parts/html/login.html' %}
+    {% include 'parts/login/tmpl.html' %}
     {% block body %}
         {% block nav %}
-            {% include "parts/html/nav.html" %}
+            {% include "parts/nav/tmpl.html" %}
         {% endblock nav %}
 
         {% block header %}
@@ -51,7 +51,7 @@
         {% endblock main %}
 
         {% block footer %}
-            {% include "parts/html/footer.html" %}
+            {% include "parts/footer/tmpl.html" %}
         {% endblock footer %}
     {% endblock body %}
     </body>

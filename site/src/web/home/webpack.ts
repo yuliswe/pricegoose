@@ -1,5 +1,5 @@
 export * from 'base'
-import 'home/js/trend'
+import './trends'
 
 export function init() {
 
