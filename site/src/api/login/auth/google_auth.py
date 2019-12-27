@@ -1,27 +1,19 @@
 from google.oauth2 import id_token
 from google.auth.transport import requests
+from rest_framework.exceptions import AuthenticationFailed
 
-# (Receive token by HTTPS POST)
-# ...
+# Constants
+CLIENT_ID = "177658327332-91h4mpna2r7js6hp2hrc79n2vofnorth.apps.googleusercontent.com"
 
-try:
+# Given token, returns user's basic information
+# Note: verify_oauth2_token may raise exceptions
+def google_auth(token):
     # Specify the CLIENT_ID of the app that accesses the backend:
     idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
 
-    # Or, if multiple clients access the backend server:
-    # idinfo = id_token.verify_oauth2_token(token, requests.Request())
-    # if idinfo['aud'] not in [CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]:
-    #     raise ValueError('Could not verify audience.')
-
+    # If token is not issued by google, raise exception
     if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-        raise ValueError('Wrong issuer.')
+        raise AuthenticationFailed()
 
-    # If auth request is from a G Suite domain:
-    # if idinfo['hd'] != GSUITE_DOMAIN_NAME:
-    #     raise ValueError('Wrong hosted domain.')
-
-    # ID token is valid. Get the user's Google Account ID from the decoded token.
-    userid = idinfo['sub']
-except ValueError:
-    # Invalid token
-    pass
+    # ID token is valid. Return the idinfo to caller
+    return idinfo
