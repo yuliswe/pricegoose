@@ -84,6 +84,14 @@ STATICFILES_DIRS = [
     '/root/var/static',
 ]
 
+TEMPLATE_LIBS = {}
+for path in BASE_DIR.glob('web/**/tags/*'):
+    if path.is_dir():
+        tag_name = path.name
+        print(tag_name, flush=True)
+        TEMPLATE_LIBS[tag_name] = 'src.' + str(path.relative_to(BASE_DIR)).replace('/', '.') + '.tag'
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -96,6 +104,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': TEMPLATE_LIBS,
         },
     },
 ]

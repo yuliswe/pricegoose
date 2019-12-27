@@ -3,6 +3,6 @@ from src.web.base.views import BaseView
 from ipromise import overrides
 
 
-class IndexView(BaseView):
+class TrendsView(BaseView):
     def get(self, request):
-        return render(request, 'home/html/trend.html', self.context())
+        return render(request, 'home/trends/tmpl.html', self.context())

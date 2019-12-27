@@ -1,0 +1,19 @@
+{% extends 'base/html/document.html' %}
+{% load price_drop_carousel %}
+
+{% block main %}
+<main>
+    <div class='section'>
+        <h1 class='section-title'>Fashion &amp; Style</h1>
+        {% include 'home/parts/ad-fashion/tmpl.html' %}
+    </div>
+    <div class='section'>
+        <h1 class='section-title'>Latest Price Drop</h1>
+        {% price_drop_carousel '' %}
+    </div>
+    <div class='section'>
+        <h1 class='section-title'>Electronics</h1>
+        {% include 'home/parts/ad-electronics/tmpl.html' %}
+    </div>
+</main>
+{% endblock main %}
