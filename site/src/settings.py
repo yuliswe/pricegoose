@@ -85,11 +85,9 @@ STATICFILES_DIRS = [
 ]
 
 TEMPLATE_LIBS = {}
-for path in BASE_DIR.glob('web/**/tags/*'):
-    if path.is_dir():
-        tag_name = path.name
-        print(tag_name, flush=True)
-        TEMPLATE_LIBS[tag_name] = 'src.' + str(path.relative_to(BASE_DIR)).replace('/', '.') + '.tag'
+for path in BASE_DIR.glob('web/**/tags/*.py'):
+    if path.stem != '__init__':
+        TEMPLATE_LIBS[path.stem] = str(path.relative_to(BASE_DIR.parent).with_suffix('')).replace('/', '.')
 
 
 TEMPLATES = [

@@ -1,0 +1,14 @@
+main {
+    display: grid;
+    gap: 2.5rem;
+    .section {
+    }
+    .section-title {
+        padding: 1rem;
+        display: flex;
+    }
+    .fashion-price-drop {
+        background-color: #ddd;
+        padding: 1rem 0;
+    }
+}

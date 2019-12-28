@@ -1,0 +1,33 @@
+@import 'base/css/mixin';
+
+.price-drop-carousel {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    .item {
+        box-shadow: 0 0 5px #eee;
+        width: 300px;
+        flex-shrink: 0;
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .product-name {
+            text-align: center;
+            vertical-align: middle;
+            padding: 1rem;
+        }
+    }
+}
+
+body.trends {
+
+    .price-drop-carousel {
+        width: 100vw;
+        @include hide-scrollbar;
+    }
+    .fashion-price-drop.price-drop-carousel {
+        justify-content: space-evenly;
+    }
+}

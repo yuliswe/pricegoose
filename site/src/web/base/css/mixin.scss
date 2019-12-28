@@ -20,3 +20,11 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: $nrows;
 }
+
+@mixin hide-scrollbar {
+    scrollbar-width: none; /* Firefox 64 */
+    -ms-overflow-style: none; /* Internet Explorer 11 */
+    &::-webkit-scrollbar { /** WebKit */
+      display: none;
+    }
+}
