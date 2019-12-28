@@ -7,7 +7,7 @@ def google_login(request):
     serializer = TokenSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     token = serializer.validated_data["token"]
-    
+
     # Authenticate using google_auth, may raise exception
     idinfo = google_auth(token)
     
@@ -24,4 +24,3 @@ def google_login(request):
     user = User.objects.get_or_create(email=email, first_name=fname, last_name=lname)
 
     login(request, user)
-    # TODO Redirect to a success page.
