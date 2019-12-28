@@ -37,10 +37,10 @@
     </head>
 
     <body class="{% block body_class %} base {% endblock %} {% if not user.is_authenticated %}js-user-anonymous{% endif %}">
-    {% include 'parts/login/tmpl.html' %}
+    {% include 'parts/login.html' %}
     {% block body %}
         {% block nav %}
-            {% include "parts/nav/tmpl.html" %}
+            {% include "parts/nav.html" %}
         {% endblock nav %}
 
         {% block header %}
@@ -51,7 +51,7 @@
         {% endblock main %}
 
         {% block footer %}
-            {% include "parts/footer/tmpl.html" %}
+            {% include "parts/footer.html" %}
         {% endblock footer %}
     {% endblock body %}
     </body>

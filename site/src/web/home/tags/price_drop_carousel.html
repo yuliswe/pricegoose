@@ -2,7 +2,7 @@
     {% for p in products %}
     <li class='item'>
         <img src={{ p.image_url }}>
-        <div>{{ p.name }}</div>
+        <div class='product-name'>{{ p.name }}</div>
     </li>
     {% endfor %}
 </ul>
