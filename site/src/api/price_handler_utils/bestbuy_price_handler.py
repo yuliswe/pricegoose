@@ -23,7 +23,7 @@ class BestbuyPriceHandler(BasePriceHandler):
         if len(matches) == 0:
             raise WebsiteLayoutException("Element with class name 'price_FHDfG' is not found")
 
-        price_str = matches[0].text  # ex. str $8999 ($80.99)
+        price_str = matches[0].text  # ex. str $8999 ($89.99)
         if price_str is None or len(price_str) == 0:
             raise WebsiteLayoutException("No price available in given HTML element: %s" % matches[0])
 
