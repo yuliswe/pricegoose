@@ -1,0 +1,8 @@
+<ul class='price-drop-carousel'>
+    {% for p in products %}
+    <li class='item'>
+        <img src={{ p.image_url }}>
+        <div class='product-name'>{{ p.name }}</div>
+    </li>
+    {% endfor %}
+</ul>

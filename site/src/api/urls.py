@@ -1,6 +1,6 @@
 from django.urls import path, include
-
+from .login.login import LoginAPI
 
 urlpatterns = [
-    path('helloworld', include('src.api.helloworld.urls')),
+    path('login', LoginAPI.as_view(), name='login_api'),
 ]

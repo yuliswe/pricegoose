@@ -1,0 +1,65 @@
+@import './theme';
+
+body {
+    margin: 0;
+}
+
+li {
+    padding: 0;
+}
+
+ol, ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+a, a:active, a:visited {
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+    // color: unset;
+}
+
+input[type=submit] {
+    cursor: pointer;
+}
+
+* {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: normal;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        Helvetica,
+        Tahoma,
+        Arial,
+        'PingFang SC',
+        STXihei, "华文细黑",
+        "Microsoft YaHei", "微软雅黑",
+        SimSun, "宋体",
+        Heiti, "黑体",
+        sans-serif;
+}
+
+hr {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+}
+
+button {
+    box-sizing: content-box;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    color: $button-font-gray;
+    background-color: $button-background-gray;
+    border-color: $button-border-gray;
+}
+
+button:hover {
+    background-color: $button-border-gray;
+}

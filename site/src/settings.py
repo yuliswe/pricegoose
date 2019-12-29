@@ -77,6 +77,19 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'src.urls'
 
+STATIC_URL = '/static/'
+STATIC_ROOT = '/root/var/collectstatic'
+STATICFILES_DIRS = [
+    BASE_DIR / 'web' / 'static',
+    '/root/var/static',
+]
+
+TEMPLATE_LIBS = {}
+for path in BASE_DIR.glob('web/**/tags/*.py'):
+    if path.stem != '__init__':
+        TEMPLATE_LIBS[path.stem] = str(path.relative_to(BASE_DIR.parent).with_suffix('')).replace('/', '.')
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -89,6 +102,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': TEMPLATE_LIBS,
         },
     },
 ]

@@ -1,0 +1,27 @@
+{% extends 'base/html/document.html' %}
+{% load price_drop_carousel %}
+{% block body_class %} {{ block.super }} trends {% endblock %}
+{% block main %}
+<main>
+    <div class='section'>
+        <h1 class='section-title'>Fashion &amp; Style</h1>
+        {% include 'home/parts/ad-fashion.html' %}
+    </div>
+    <div class='section fashion-price-drop'>
+        <div class='section-title'>
+            <span class=''>Latest Price Drop</span>
+        </div>
+        {% price_drop_carousel fashion_pd_list %}
+    </div>
+    <div class='section'>
+        <h1 class='section-title'>Electronics</h1>
+        {% include 'home/parts/ad-electronics.html' %}
+    </div>
+    <div class='section electronics-price-drop'>
+        <div class='section-title'>
+            <span class=''>Latest Price Drop</span>
+        </div>
+        {% price_drop_carousel electronics_pd_list %}
+    </div>
+</main>
+{% endblock main %}

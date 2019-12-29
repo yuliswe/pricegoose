@@ -1,0 +1,72 @@
+@import 'base/css/mixin.scss';
+
+@import url('https://fonts.googleapis.com/css?family=Long+Cang&display=swap');
+
+.nav {
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 0 10px #aaa;
+    .row {
+        display: flex;
+    }
+    .row:nth-child(1) {
+        padding: 1rem 0;
+        display: grid;
+        grid-template-columns: max-content minmax(0, 2rem) max-content auto max-content;
+    }
+    .row:nth-child(2) {
+        padding: 1rem 2rem;
+        * {
+            font-weight: lighter;
+        }
+    }
+    .logo {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        padding: 0 3rem;
+        font-family: 'Long Cang', cursive;
+        font-size: 2.5rem;
+        font-weight: normal;
+    }
+    .search {
+        display: flex;
+        $radius: 0.25rem;
+        input {
+            font-size: 1rem;
+            padding: 0 1.5rem;
+            width: 20rem;
+            border: none;
+            background-color: #eee;
+            border-top-left-radius: $radius;
+            border-bottom-left-radius: $radius;
+        }
+        button {
+            font-size: 1.25rem;
+            padding: 0.75rem 1.25rem;
+            border-top-right-radius: $radius;
+            border-bottom-right-radius: $radius;
+            color: #555;
+        }
+    }
+    .menu {
+        display: flex;
+        @include fix-flex-gap(1rem, 3rem);
+        padding: 0 2rem;
+        .menu-item {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            padding: 0.75rem 1rem;
+        }
+    }
+    .categories {
+        display: flex;
+        @include fix-flex-gap(1rem, 3rem);
+        .categories-item {
+            display: grid;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}

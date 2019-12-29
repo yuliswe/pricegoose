@@ -7,4 +7,5 @@ Django>=2.1.5,<3
 djangorestframework
 django-extensions
 ipromise
+requests
 google-auth
