@@ -8,21 +8,26 @@ register = template.Library()
 
 
 class ProductWithPriceDropInfo():
+
     @must_augment
     def name(self):
         return 'Unnamed Product'
 
     @must_augment
-    def original_price(self):
+    def previous_price(self):
         return 10
 
     @must_augment
-    def new_price(self):
+    def current_price(self):
         return 1
 
     @must_augment
     def image_url(self):
         return f'{settings.STATIC_URL}/webpack/assets/placeholder.png'
+
+    @must_augment
+    def price_trend(self):
+        return 'down'
 
 
 @register.simple_tag

@@ -3,6 +3,7 @@ from .auth.google_auth import google_auth
 from .token_serializer import TokenSerializer
 from src.common.models.user import User
 
+
 def google_login(request):
     serializer = TokenSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
@@ -10,7 +11,7 @@ def google_login(request):
 
     # Authenticate using google_auth, may raise exception
     idinfo = google_auth(token)
-    
+
     # User info
     email = idinfo["email"]
     fname = idinfo["given_name"]
@@ -26,5 +27,5 @@ def google_login(request):
     # Send welcome email when user first created
     if created == True:
         ...
-    
+
     login(request, user)

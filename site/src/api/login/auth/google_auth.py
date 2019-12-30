@@ -3,7 +3,7 @@ from google.auth.transport import requests
 from rest_framework.exceptions import AuthenticationFailed
 
 # Constants
-CLIENT_ID = "913411356857-rvn5hmvave91hgg0firrlt1j5rvoh1f5.apps.googleusercontent.com"
+CLIENT_ID = "913411356857-8qemhkmelnt3bdv2c1n0fbu20lessg62.apps.googleusercontent.com"
 # For testing using Google Playground
 # CLIENT_ID = "407408718192.apps.googleusercontent.com"
 
