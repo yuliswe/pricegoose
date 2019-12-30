@@ -1,6 +1,6 @@
 from django.contrib.auth import login
 from .auth.google_auth import google_auth
-from src.common.serializers.token_serializer import TokenSerializer
+from .token_serializer import TokenSerializer
 from src.common.models.user import User
 
 def google_login(request):
@@ -21,6 +21,10 @@ def google_login(request):
     #"picture": "https://lh4.googleusercontent.com/-kYgzyAWpZzJ/ABCDEFGHI/AAAJKLMNOP/tIXL9Ir44LE/s99-c/photo.jpg"
     #"locale": "en"
 
-    user = User.objects.get_or_create(email=email, first_name=fname, last_name=lname)
+    user, created = User.objects.get_or_create(email=email, first_name=fname, last_name=lname)
 
+    # Send welcome email when user first created
+    if created == True:
+        ...
+    
     login(request, user)

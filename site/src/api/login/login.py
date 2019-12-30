@@ -5,7 +5,10 @@ from rest_framework.response import Response
 
 class LoginAPI(APIView):
     def post(self, request):
-        # TODO Currently only handles google login, add more
-        google_login(request)
+        try:
+            # TODO Currently only handles google login, add more
+            google_login(request)
+        except KeyError:
+            return Response(status=400)
 
-        return Response()
+        return Response(True)
