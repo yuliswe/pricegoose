@@ -2,7 +2,7 @@ from django.contrib.auth import login
 from .auth.google_auth import google_auth
 from .token_serializer import TokenSerializer
 from src.common.models.user import User
-from .common.models.google_user import GoogleUser
+from src.common.models.google_user import GoogleUser
 
 
 
