@@ -10,5 +10,7 @@ class LoginAPI(APIView):
             google_login(request)
         except KeyError:
             return Response(status=400)
-
+        except:
+            return Response(status=400)
+            
         return Response(True)
