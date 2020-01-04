@@ -9,6 +9,7 @@
     "css-loader": "^3.4.0",
     "file-loader": "^5.0.2",
     "jquery": "^3.4.1",
+    "js-cookie": "^2.2.1",
     "node-sass": "^4.13.0",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.1.2",
