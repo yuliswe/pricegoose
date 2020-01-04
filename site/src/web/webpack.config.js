@@ -3,6 +3,7 @@ const path = require('path')
 module.exports = {
   entry: {
     home: 'home/webpack.ts',
+    lib: 'lib/index.ts',
   },
   devtool: 'inline-source-map',
   output: {
