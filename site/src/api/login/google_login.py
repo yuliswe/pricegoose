@@ -2,7 +2,7 @@ from django.contrib.auth import login
 from .auth.google_auth import google_auth
 from .token_serializer import TokenSerializer
 from src.common.models.user import User
-from src.common.models.google_user import GoogleUser
+from src.common.models.third_party_users import GoogleUser
 
 
 
@@ -25,18 +25,22 @@ def google_login(request):
     #"picture": "https://lh4.googleusercontent.com/-kYgzyAWpZzJ/ABCDEFGHI/AAAJKLMNOP/tIXL9Ir44LE/s99-c/photo.jpg"
     #"locale": "en"
     
-    #google_user, is_created = GoogleUser.objects.get_or_create(google_id)
-    #user, created = User.objects.get_or_create(google_user=google_user)
-    #user.update(email=email, first_name=fname,last_name=lname)
-    user, created = User.objects.get_or_create(email=email, first_name=fname, last_name=lname)
-
-    #user.email=email
-    #user.first_name=fname,
-    #user.last_name=lname
-    #user.save()
-
+    google_user, is_created = GoogleUser.objects.get_or_create(sub=google_id)
+    if is_created:
+        # It's a new user. Create internal User for this user
+        user = User(email=email, first_name=fname, last_name=lname)
+        
+        google_user.user = user
+        google_user.save()
+    else:
+        # Update user info
+        google_user.user.email = email
+        google_user.user.first_name = fname
+        google_user.user.last_name = lname
+        google_user.save()
+    
     # Send welcome email when user first created
-    if created == True:
+    if is_created == True:
         ...
 
     login(request, user)
