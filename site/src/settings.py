@@ -93,7 +93,9 @@ for path in BASE_DIR.glob('web/**/tags/*.py'):
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR / 'web' ],
+        'DIRS': [ BASE_DIR / 'web',
+                  BASE_DIR / 'api'/'notifications'
+                  ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -163,3 +165,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Email Settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_USE_TLS = True
+
+EMAIL_PORT = 587
+
+EMAIL_HOST_USER = 'pricedropca@gmail.com'
+
+EMAIL_HOST_PASSWORD = 'Droppie123'
+
