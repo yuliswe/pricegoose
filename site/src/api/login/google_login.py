@@ -3,6 +3,7 @@ from .auth.google_auth import google_auth
 from .token_serializer import TokenSerializer
 from src.common.models.user import User
 from src.common.models.third_party_users import GoogleUser
+from src.api.notifications.welcome import welcome_email
 
 DEBUG_PRINT = True
 
@@ -19,7 +20,7 @@ def google_login(request):
     fname = idinfo["given_name"]
     lname = idinfo["family_name"]
     google_id = idinfo["sub"]
-    # Other unused info
+    # Other unused info for future
     #"email_verified": "true"
     #"name" : "Test User"
     #"picture": "https://lh4.googleusercontent.com/-kYgzyAWpZzJ/ABCDEFGHI/AAAJKLMNOP/tIXL9Ir44LE/s99-c/photo.jpg"
@@ -33,7 +34,7 @@ def google_login(request):
             print("Creating User.")
 
         # It's a new user. Create internal User for this user
-        user = User.objects.get_or_create(username=email, email=email, first_name=fname, last_name=lname)
+        user, user_is_created = User.objects.get_or_create(username=email, email=email, first_name=fname, last_name=lname)
         
         if DEBUG_PRINT:
             print("User has been retrieved or created.")
@@ -44,6 +45,9 @@ def google_login(request):
         if DEBUG_PRINT:
             print("Existing user, not creating.")
         
+        if google_user.user is None:
+            raise AttributeError
+
         # Update user info
         google_user.user.email = email
         google_user.user.first_name = fname
@@ -53,10 +57,14 @@ def google_login(request):
         if DEBUG_PRINT:
             print("Existing user info updated.")
     
+
+    if DEBUG_PRINT:
+        print("User and google user set up done.")
     # Send welcome email when user first created
     if is_created == True:
-        ...
+        welcome_email(email, fname)
 
+    # TODO fix this since it is not logging in when switching to a new account
     # log in only if user not currently logged in
     if google_user.user.is_authenticated == False:
         if DEBUG_PRINT:
