@@ -11,17 +11,24 @@ export class LoginAPI {
         });
         const google_user = google_auth.currentUser.get()
         const id_token = google_user.getAuthResponse().id_token
-        await $.ajax(URLs.LOGIN_VIA_GOOGLE, {
-            method: 'POST',
-            dataType: 'json',
-            headers: {
-                'X-CSRFToken': Cookies.get('csrftoken'),
-            },
-            data: {
-                'token': id_token,
-            },
-        })
-        google_auth.signOut()
+        try {
+            await $.ajax(URLs.LOGIN_VIA_GOOGLE, {
+                method: 'POST',
+                dataType: 'json',
+                headers: {
+                    'X-CSRFToken': Cookies.get('csrftoken'),
+                },
+                data: {
+                    'token': id_token,
+                },
+            })
+        } catch(e) {
+            console.error('bad login')
+            throw e;
+        }
+        finally {
+            google_auth.signOut()
+        }
     }
 }
 

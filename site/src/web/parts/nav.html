@@ -2,7 +2,10 @@
     <div class='row'>
         <div class='site-logo'>{{ site_logo }}</div>
         <form class='search-form'>
-            <input class='search-input' name='query' type='text' placeholder='Search'>
+            <input class='search-input'
+                name='query'
+                type='text'
+                placeholder='Search something quick... honk!'>
             {% comment %} <button type='submit'>
                 <i class='fa fa-search'></i>
             </button> {% endcomment %}
@@ -27,9 +30,11 @@
         <ul class='menu'>
             <li class='menu-item'>
                 {% if user.is_authenticated %}
-                Hello user {{ user.id }}
+                <div class='user-profile-thumbnail' data-js-open-user-profile>
+                    YL
+                </div>
                 {% else %}
-                Login
+                <div class='login' data-js-open-login>Login</div>
                 {% endif %}
             </li>
         </ul>
@@ -40,4 +45,5 @@
         <li class='categories-item'>Electronics</li>
     </ul>
     {% include 'parts/login.html' %}
+    {% include 'parts/user-profile.html' %}
 </nav>
