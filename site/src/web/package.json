@@ -6,6 +6,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@types/jquery": "^3.3.31",
     "css-loader": "^3.4.0",
     "file-loader": "^5.0.2",
     "jquery": "^3.4.1",

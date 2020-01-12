@@ -1,5 +1,3 @@
-import 'parts/nav'
-import 'parts/footer'
 import './trends.scss'
 import 'home/parts/ad-fashion'
 import 'home/parts/ad-electronics'
