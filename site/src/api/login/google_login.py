@@ -66,11 +66,13 @@ def google_login(request):
 
     # TODO fix this since it is not logging in when switching to a new account
     # log in only if user not currently logged in
-    if google_user.user.is_authenticated == False:
-        if DEBUG_PRINT:
-            print("Logging in the user")
+    if request.user.is_authenticated:
+        raise EnvironmentError
 
-        login(request, user)
+    if DEBUG_PRINT:
+        print("Logging in the user")
+
+    login(request, user)
 
     if DEBUG_PRINT:
         print("Google Login done")
