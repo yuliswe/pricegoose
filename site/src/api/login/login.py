@@ -18,8 +18,10 @@ class LoginAPI(APIView):
             return Response(status=400, data="Error: Login Failed (Code: 10001)")
         except AttributeError:
             return Response(status=401, data="Error: Login Failed (Code: 10002)")
+        except EnvironmentError:
+            return Response(status=402, data="Error: Login Failed (Code: 10003)")
         except:
-            return Response(status=400, data="Error: Login Failed (Code: 10002)")
+            return Response(status=403, data="Error: Login Failed (Code: 10004)")
             
         return Response(True)
 
