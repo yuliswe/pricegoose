@@ -86,15 +86,17 @@ STATICFILES_DIRS = [
 TEMPLATE_LIBS = {}
 for path in BASE_DIR.glob('web/**/tags/*.py'):
     if path.stem != '__init__':
-        TEMPLATE_LIBS[path.stem] = str(path.relative_to(BASE_DIR.parent).with_suffix('')).replace('/', '.')
+        TEMPLATE_LIBS[path.stem] = str(path.relative_to(
+            BASE_DIR.parent).with_suffix('')).replace('/', '.')
 
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR / 'web',
-                  BASE_DIR / 'api'/'notifications'
-                  ],
+        'DIRS': [
+            BASE_DIR / 'web',
+            BASE_DIR / 'api/notifications'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -178,4 +180,3 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'pricedropca@gmail.com'
 
 EMAIL_HOST_PASSWORD = 'Droppie123'
-
