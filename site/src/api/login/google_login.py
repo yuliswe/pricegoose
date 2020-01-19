@@ -39,7 +39,7 @@ def google_auth_login(request):
 '''
 
 # Constants
-CLIENT_ID = "913411356857-8qemhkmelnt3bdv2c1n0fbu20lessg62.apps.googleusercontent.com"
+CLIENT_ID = "848652265647-3jqp1kq05605bnuj3h7skropcbvqhqhv.apps.googleusercontent.com"
 # For testing using Google Playground
 # CLIENT_ID = "407408718192.apps.googleusercontent.com"
 
