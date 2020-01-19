@@ -1,4 +1,3 @@
-from django.views import View
 from django.http.response import HttpResponseRedirect
 from .base_view import BaseView
 from django.contrib.auth import logout

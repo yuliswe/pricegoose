@@ -10,4 +10,3 @@ class AmazonProductHandlerTest(TestCase):
 
     def test_get_price(self):
         pass
-

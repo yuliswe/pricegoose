@@ -1,5 +1,5 @@
-from .user import *
-from .item import *
-from .price import *
-from .subscribed_item import *
-from .tag import *
+from .user import *  # noqa
+from .item import *  # noqa
+from .price import *  # noqa
+from .subscribed_item import *  # noqa
+from .tag import *  # noqa
