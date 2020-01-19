@@ -10,5 +10,6 @@ def welcome_email(recipient, first_name):
     subject = 'Thank you for registering to our site'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [recipient]
-    send_mail(subject, plain_message, email_from, recipient_list, html_message=html_message, fail_silently=False)
+    send_mail(subject, plain_message, email_from, recipient_list,
+              html_message=html_message, fail_silently=False)
 
