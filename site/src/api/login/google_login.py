@@ -1,14 +1,22 @@
 from django.contrib.auth import login
-from .auth.google_auth import google_auth
-from .token_serializer import TokenSerializer
+from google.oauth2 import id_token
+from google.auth.transport import requests
+from rest_framework.exceptions import AuthenticationFailed
 from src.common.models.user import User
 from src.common.models.third_party_users import GoogleUser
 from src.api.notifications.welcome import welcome_email
+from .token_serializer import TokenSerializer
+
 
 DEBUG_PRINT = False
 
 
-def google_login(request):
+'''
+    Authenticate the user then log in
+'''
+
+
+def google_auth_login(request):
     serializer = TokenSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     token = serializer.validated_data["token"]
@@ -16,17 +24,47 @@ def google_login(request):
     # Authenticate using google_auth, may raise exception
     idinfo = google_auth(token)
 
-    # User info
-    email = idinfo["email"]
-    fname = idinfo["given_name"]
-    lname = idinfo["family_name"]
-    google_id = idinfo["sub"]
-    # Other unused info for future
+    # Unused info for future
     # "email_verified": "true"
     # "name" : "Test User"
     # "picture": "https://lh4.googleusercontent.com/-kYgzyAWpZzJ/ABCDEFGHI/AAAJKLMNOP/tIXL9Ir44LE/s99-c/photo.jpg"
     # "locale": "en"
 
+    # Login using user info in idinfo
+    google_login(request, idinfo["email"], idinfo["given_name"], idinfo["family_name"], idinfo["sub"])
+
+
+'''
+    Google OAuth2 Authentication Code
+'''
+
+# Constants
+CLIENT_ID = "913411356857-8qemhkmelnt3bdv2c1n0fbu20lessg62.apps.googleusercontent.com"
+# For testing using Google Playground
+# CLIENT_ID = "407408718192.apps.googleusercontent.com"
+
+
+# Given token, returns user's basic information
+# Note: verify_oauth2_token may raise exceptions
+def google_auth(token):
+    # Specify the CLIENT_ID of the app that accesses the backend:
+    idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
+
+    # If token is not issued by google, raise exception
+    if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+        raise AuthenticationFailed()
+
+    # ID token is valid. Return the idinfo to caller
+    return idinfo
+
+
+'''
+    Login method after successful authentication
+    Can be used in unit testing
+'''
+
+
+def google_login(request, email, fname, lname, google_id):
     google_user, is_created = GoogleUser.objects.get_or_create(sub=google_id)
     if DEBUG_PRINT:
         print("Google User has been retrieved or created.")
