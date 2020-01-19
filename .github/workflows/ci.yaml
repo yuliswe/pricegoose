@@ -1,0 +1,23 @@
+name: triggered continuous tests
+
+on: [push]
+
+jobs:
+  style-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Check Style Guide
+        run: |
+          cd site
+          pip install flake8 pycodestyle > /dev/null
+          flake8 .
+          flake8_exitcode=$?
+          pycodestyle .
+          pycodestyle_exitcode=$?
+          if [ $flake8_exitcode -ne 0 ] || [ $pycodestyle_exitcode -ne 0]; then
+            exit 1
+          fi
