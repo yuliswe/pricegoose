@@ -48,7 +48,7 @@ RUN python3.7 manage.py runscript make-migration-dirs
 RUN service postgresql start && \
     wait-for-it localhost:5432 && \
     su - postgres -c "psql -c \"ALTER USER postgres PASSWORD 'postgres';\"" && \
-    su - postgres -c "psql -c \"CREATE DATABASE droppie;\"" && \
+    su - postgres -c "psql -c \"CREATE DATABASE site;\"" && \
     python3.7 manage.py makemigrations && \
     python3.7 manage.py migrate
 

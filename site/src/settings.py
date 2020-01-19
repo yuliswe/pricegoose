@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
-import os
 from pathlib import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -32,7 +31,7 @@ ALLOWED_HOSTS = [
 ]
 
 # Application definition
-DROPPIE_APPS = [
+SITE_APPS = [
     'src.common',
 ]
 
@@ -52,7 +51,7 @@ INSTALLED_APPS = [
     # https://django-extensions.readthedocs.io/en/latest/index.html
     'rest_framework',
     # https://www.django-rest-framework.org/
-] + DROPPIE_APPS
+] + SITE_APPS
 
 MIGRATION_MODULES_ROOT = Path('/root/migrations')
 MIGRATION_MODULES = {
@@ -118,7 +117,7 @@ WSGI_APPLICATION = 'src.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'droppie',
+        'NAME': 'site',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': '127.0.0.1',

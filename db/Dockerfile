@@ -15,6 +15,6 @@ COPY ./pg_hba.conf /etc/postgresql/10/main/pg_hba.conf
 RUN service postgresql start && \
     wait-for-it localhost:5432 && \
     su - postgres -c "psql -c \"ALTER USER postgres PASSWORD 'postgres';\"" && \
-    su - postgres -c "psql -c \"CREATE DATABASE droppie;\""
+    su - postgres -c "psql -c \"CREATE DATABASE site;\""
 
 CMD service postgresql start && sleep inf
