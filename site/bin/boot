@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 service postgresql start
-until wait-for-it localhost:5432 && python3.7 manage.py runserver 0.0.0.0:80; do
+wait-for-it localhost:5432
+python3.7 manage.py runserver --force-color 0.0.0.0:80
 sleep 3
-echo starting server...
-done
+exit 1 # runserver is expected to run forever

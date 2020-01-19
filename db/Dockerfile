@@ -6,8 +6,8 @@ ENV LANGUAGE C.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update --fix-missing
-RUN apt-get -y install libpq-dev postgresql postgresql-contrib
-RUN apt-get -y install wait-for-it
+RUN apt-get install -y libpq-dev postgresql postgresql-contrib
+RUN apt-get install -y wait-for-it
 
 COPY ./postgresql.conf /etc/postgresql/10/main/postgresql.conf
 COPY ./pg_hba.conf /etc/postgresql/10/main/pg_hba.conf

@@ -1,0 +1,2 @@
+#!/bin/bash
+yarn install --dev --modules-folder ${NODE_PATH}

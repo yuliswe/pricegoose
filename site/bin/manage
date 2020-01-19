@@ -1,2 +1,2 @@
 #!/bin/bash
-python3.7 ${SITE_ROOT}/manage.py
+python3.7 ${SITE_ROOT}/manage.py $@

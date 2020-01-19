@@ -26,16 +26,17 @@ RUN apt-get -y install yarn
 # set environment
 ENV SITE_ROOT /root/site
 ENV NODE_PATH /root/var/node_modules
-ENV PATH /root/bin:${PATH}
+ENV PATH ${SITE_ROOT}/bin:/root/bin:${PATH}
 ENV PATH ${NODE_PATH}/.bin:${PATH}
+ENV PYTHONPATH /root
 RUN mkdir /root/shared
 RUN mkdir /root/var
 
 WORKDIR /root/var
 COPY requirements.txt .
 RUN python3.7 -m pip install -r requirements.txt
-COPY package.json .
-COPY yarn.lock .
+COPY src/web/package.json .
+COPY src/web/yarn.lock .
 RUN yarn install --dev --modules-folder ${NODE_PATH}
 # copy source
 COPY bin /root/bin
@@ -43,7 +44,6 @@ RUN chmod u+x /root/bin/*
 COPY . /root/site
 WORKDIR /root/site
 # set up database
-ENV PYTHONPATH /root
 RUN python3.7 manage.py runscript make-migration-dirs
 RUN service postgresql start && \
     wait-for-it localhost:5432 && \

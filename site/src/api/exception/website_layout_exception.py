@@ -1,0 +1,2 @@
+class WebsiteLayoutException(Exception):
+    pass
