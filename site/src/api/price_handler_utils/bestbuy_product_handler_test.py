@@ -12,4 +12,3 @@ class BestBuyProductHandlerTest(SimpleTestCase):
         product = BestbuyProductHandler.get_info(url_info)
         print(product.price)
         print(product.name)
-

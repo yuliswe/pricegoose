@@ -3,6 +3,7 @@ from .user import User
 
 MAX_GOOGLE_SUB_LENGTH = 255
 
+
 class GoogleUser(models.Model):
     # sub is the unique identifier for all Google accounts and never reused
     #  i.e. the unique google ID

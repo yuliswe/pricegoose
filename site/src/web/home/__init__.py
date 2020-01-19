@@ -1,1 +1,1 @@
-from .trends import *
+from .trends import *  # noqa

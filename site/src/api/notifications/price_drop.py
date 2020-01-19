@@ -9,5 +9,5 @@ def price_drop_email():
     plain_message = strip_tags(html_message)
     subject = 'Price Drop Alert'
     email_from = settings.EMAIL_HOST_USER
-    recipient_list = [email_from,]
+    recipient_list = [email_from, ]
     send_mail(subject, plain_message, email_from, recipient_list, html_message=html_message, fail_silently=False)

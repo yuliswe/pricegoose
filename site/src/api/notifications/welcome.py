@@ -11,4 +11,3 @@ def welcome_email(recipient, first_name):
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [recipient]
     send_mail(subject, plain_message, email_from, recipient_list, html_message=html_message, fail_silently=False)
-

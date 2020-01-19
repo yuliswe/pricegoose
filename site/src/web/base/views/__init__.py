@@ -1,2 +1,2 @@
-from .base_view import *
-from .logout_view import *
+from .base_view import *  # noqa
+from .logout_view import *  # noqa

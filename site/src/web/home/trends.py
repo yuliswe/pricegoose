@@ -4,6 +4,7 @@ from ipromise import overrides
 
 from src.web.home.tags.price_drop_carousel import ProductWithPriceDropInfo
 
+
 class TrendsView(BaseView):
     def get(self, request):
         return render(request, 'home/trends.html', self.context())
