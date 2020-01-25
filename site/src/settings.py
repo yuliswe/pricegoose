@@ -10,10 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
-import os
+from pathlib import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,15 +25,19 @@ SECRET_KEY = '=)j#hxj%&js=qd4xc_sxl1!g--@fn1n0d8ptm^c40l#!@y-h7h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-# Application definition
-DROPPIE_APPS = [
-    'src.web.helloworld',
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
 ]
 
 # Application definition
+SITE_APPS = [
+    'src.common',
+]
 
+AUTH_USER_MODEL = 'common.User'
+
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.auth',  # 提供authentication
     # https://docs.djangoproject.com/en/2.2/ref/contrib/contenttypes
@@ -45,7 +49,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',  # 提供网站css, js
     'django_extensions',  # 提供manage.py runscript
     # https://django-extensions.readthedocs.io/en/latest/index.html
-] + DROPPIE_APPS
+    'rest_framework',
+    # https://www.django-rest-framework.org/
+] + SITE_APPS
+
+MIGRATION_MODULES_ROOT = Path('/root/migrations')
+MIGRATION_MODULES = {
+    'common': 'migrations.common'
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -59,10 +76,27 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'src.urls'
 
+STATIC_URL = '/static/'
+STATIC_ROOT = '/root/var/collectstatic'
+STATICFILES_DIRS = [
+    BASE_DIR / 'web' / 'static',
+    '/root/var/static',
+]
+
+TEMPLATE_LIBS = {}
+for path in BASE_DIR.glob('web/**/tags/*.py'):
+    if path.stem != '__init__':
+        TEMPLATE_LIBS[path.stem] = str(path.relative_to(
+            BASE_DIR.parent).with_suffix('')).replace('/', '.')
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'web',
+            BASE_DIR / 'api/notifications'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,6 +105,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': TEMPLATE_LIBS,
         },
     },
 ]
@@ -84,7 +119,7 @@ WSGI_APPLICATION = 'src.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'droppie',
+        'NAME': 'site',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': '127.0.0.1',
@@ -131,3 +166,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Email Settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_USE_TLS = True
+
+EMAIL_PORT = 587
+
+EMAIL_HOST_USER = 'pricedropca@gmail.com'
+
+EMAIL_HOST_PASSWORD = 'Droppie123'

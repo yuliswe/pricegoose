@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-gb" }}" class="no-js">
+    <head>
+        <title>{{ site_logo }} | {{ site_title }}</title>
+
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="description" content="{% block description %}{% endblock %}">
+        <link rel="shortcut icon" type="image/ico" href="{% static 'favicon.ico' %}">
+
+
+        {% block meta %}
+        {% endblock meta %}
+
+        {% block headextra %}
+        {% endblock headextra %}
+
+        <script type="application/javascript" charset="UTF-8" src="{% static app_js_url %}"></script>
+
+        {% block styles %}
+            <link href="{% static 'fontawesome-free-5.7.2-web/css/all.css' %}" rel="stylesheet">
+        {% endblock %}
+
+        <script type="application/javascript" charset="UTF-8">
+        {% autoescape off %}
+            app.$(() => {
+                app.nav.init();
+                app.init();
+                {% block onload %}
+                {% endblock onload %}
+            })
+            async function googleSignedIn(param) {
+                await app.Login.viaGoogleToken()
+                location.reload()
+            }
+            function googleRenderSignInButton() {
+                gapi.signin2.render('g-signin2', {
+                    'scope': 'profile email',
+                    'width': 240,
+                    'height': 50,
+                    'longtitle': true,
+                    'onsuccess': googleSignedIn,
+                    'onfailure': console.error
+                });
+            }
+        {% endautoescape %}
+        </script>
+
+        <meta name="google-signin-client_id" content="848652265647-3jqp1kq05605bnuj3h7skropcbvqhqhv.apps.googleusercontent.com">
+        <script src="https://apis.google.com/js/platform.js?onload=googleRenderSignInButton" async defer></script>
+    </head>
+
+    <body class="{% block body_class %} base {% endblock %} {% if not user.is_authenticated %}js-user-anonymous{% endif %}">
+    {% block body %}
+        {% block nav %}
+            {% include "parts/nav.html" %}
+        {% endblock nav %}
+
+        {% block header %}
+        {% endblock header %}
+
+        {% block main %}
+            This is main.
+        {% endblock main %}
+
+        {% block footer %}
+            {% include "parts/footer.html" %}
+        {% endblock footer %}
+    {% endblock body %}
+    </body>
+</html>

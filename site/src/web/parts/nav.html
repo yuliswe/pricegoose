@@ -1,0 +1,49 @@
+<nav class='nav'>
+    <div class='row'>
+        <div class='site-logo'>{{ site_logo }}</div>
+        <form class='search-form'>
+            <input class='search-input'
+                name='query'
+                type='text'
+                placeholder='Search something quick... honk!'>
+            {% comment %} <button type='submit'>
+                <i class='fa fa-search'></i>
+            </button> {% endcomment %}
+            <div class='search-type-background'>
+                <label>
+                    <span class='search-type'>
+                        <input class='search-type-radio' type='radio' name='search_type' text='Seach'>
+                        <span class='radio-marker'></span>
+                    </span>
+                    <span class='hint'>Search</span>
+                </label>
+                <label>
+                    <span class='search-type'>
+                        <input class='search-type-radio' type='radio' name='search_type' text='Track'>
+                        <span class='radio-marker'></span>
+                    </span>
+                    <span class='hint'>Track Price</span>
+                </label>
+            </div>
+        </form>
+        <span class='spacer'></span>
+        <ul class='menu'>
+            <li class='menu-item'>
+                {% if user.is_authenticated %}
+                <div class='user-profile-thumbnail' data-js-open-user-profile>
+                    {{ user.first_name.0 | upper }}{{ user.last_name.0 | upper }}
+                </div>
+                {% else %}
+                <div class='login' data-js-open-login>Login</div>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+    <ul class='row categories'>
+        <li class='categories-item'>Trends</li>
+        <li class='categories-item'>Fashion &amp; Style</li>
+        <li class='categories-item'>Electronics</li>
+    </ul>
+    {% include 'parts/login.html' %}
+    {% include 'parts/user-profile.html' %}
+</nav>

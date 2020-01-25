@@ -1,0 +1,25 @@
+name: triggered continuous tests
+
+on: [push]
+
+jobs:
+  style-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Install dependencies
+        run: pip install flake8 pycodestyle
+      - name: Style check with flake8
+        run: cd site && flake8 .
+      - name: Style check with pycodestyle
+        if: always()
+        run: cd site && pycodestyle .
+  build-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Run docker build
+        run: cd site && docker build .

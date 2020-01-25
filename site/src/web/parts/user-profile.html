@@ -1,0 +1,15 @@
+{% load static %}
+
+<div class='user-profile-container' data-js-user-profile-container>
+    <div class='user-profile-thumbnail'>
+        {{ user.first_name.0 | upper }}{{ user.last_name.0 | upper }}
+    </div>
+    <div class='user-info'>
+        <div class='first-name'>Hello, {{ user.first_name }}</div>
+        <div class='email'>{{ user.email }}</div>
+    </div>
+    {% comment %} <hr> {% endcomment %}
+    <div class='buttons'>
+        <button class='logout-button' data-js-signout>Sign Out</button>
+    </div>
+</div>
