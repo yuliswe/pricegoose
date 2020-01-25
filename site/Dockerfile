@@ -52,6 +52,7 @@ RUN service postgresql start && \
     python3.7 manage.py makemigrations && \
     python3.7 manage.py migrate
 
+WORKDIR /root
 # set up supervisord
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 CMD supervisord -n -c /etc/supervisor/conf.d/supervisord.conf

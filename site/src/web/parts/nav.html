@@ -31,7 +31,7 @@
             <li class='menu-item'>
                 {% if user.is_authenticated %}
                 <div class='user-profile-thumbnail' data-js-open-user-profile>
-                    YL
+                    {{ user.first_name.0 | upper }}{{ user.last_name.0 | upper }}
                 </div>
                 {% else %}
                 <div class='login' data-js-open-login>Login</div>

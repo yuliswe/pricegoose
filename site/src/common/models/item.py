@@ -1,5 +1,5 @@
-from django.db import models
+from django.db import models as m
 
 
-class Item(models.Model):
-    url = models.CharField(max_length=2000)
+class Item(m.Model):
+    url = m.CharField(max_length=2000)

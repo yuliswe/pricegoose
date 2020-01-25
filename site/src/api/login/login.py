@@ -3,8 +3,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth import logout
 
-DEBUG_PRINT = False
-
 
 class LoginAPI(APIView):
     def post(self, request):
@@ -18,8 +16,6 @@ class LoginAPI(APIView):
         except EnvironmentError:
             return Response(status=400, data="Error: Login Failed (Code: 10003)")
         except Exception as e:
-            if DEBUG_PRINT:
-                print(e)
             return Response(status=400, data="Error: Login Failed (Code: 10004)")
 
         return Response(True)
@@ -28,15 +24,7 @@ class LoginAPI(APIView):
 class LogoutAPI(APIView):
     def post(self, request):
         try:
-            if DEBUG_PRINT:
-                print("User is being logged out.")
-                print(request.user.is_authenticated)
             logout(request)
-            if DEBUG_PRINT:
-                print("User is logged out.")
-                print(request.user.is_authenticated)
         except Exception as e:
-            if DEBUG_PRINT:
-                print(e)
             return Response(status=400, data="Error: Login Failed (Code: 10004)")
         return Response(True)

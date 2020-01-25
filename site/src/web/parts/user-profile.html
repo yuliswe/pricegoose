@@ -2,7 +2,7 @@
 
 <div class='user-profile-container' data-js-user-profile-container>
     <div class='user-profile-thumbnail'>
-        YL
+        {{ user.first_name.0 | upper }}{{ user.last_name.0 | upper }}
     </div>
     <div class='user-info'>
         <div class='first-name'>Hello, {{ user.first_name }}</div>

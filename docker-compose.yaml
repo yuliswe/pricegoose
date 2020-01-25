@@ -1,4 +1,4 @@
-version: '2'
+version: "2"
 
 services:
   # db:
@@ -9,10 +9,9 @@ services:
 
   site:
     build: ./site
+    restart: always
     hostname: site
     volumes:
       - ./site:/root/site:ro
     ports:
       - 8080:80
-    # depends_on:
-    #   - db
