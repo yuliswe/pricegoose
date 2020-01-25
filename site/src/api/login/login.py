@@ -15,7 +15,7 @@ class LoginAPI(APIView):
             return Response(status=400, data="Error: Login Failed (Code: 10002)")
         except EnvironmentError:
             return Response(status=400, data="Error: Login Failed (Code: 10003)")
-        except Exception as e:
+        except Exception:
             return Response(status=400, data="Error: Login Failed (Code: 10004)")
 
         return Response(True)
@@ -25,6 +25,6 @@ class LogoutAPI(APIView):
     def post(self, request):
         try:
             logout(request)
-        except Exception as e:
+        except Exception:
             return Response(status=400, data="Error: Login Failed (Code: 10004)")
         return Response(True)

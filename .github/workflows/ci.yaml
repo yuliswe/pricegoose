@@ -17,3 +17,9 @@ jobs:
       - name: Style check with pycodestyle
         if: always()
         run: cd site && pycodestyle .
+  build-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Run docker build
+        run: cd site && docker build .
