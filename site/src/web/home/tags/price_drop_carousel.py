@@ -23,7 +23,7 @@ class ProductWithPriceDropInfo():
 
     @must_augment
     def image_url(self):
-        return f'{settings.STATIC_URL}/webpack/assets/placeholder.png'
+        return f'{settings.STATIC_URL}/assets/placeholder.png'
 
     @must_augment
     def price_trend(self):

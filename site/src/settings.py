@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     # https://www.django-rest-framework.org/
 ] + SITE_APPS
 
-MIGRATION_MODULES_ROOT = Path('/root/migrations')
+MIGRATION_MODULES_ROOT = Path('/root/var/migrations')
 MIGRATION_MODULES = {
     'common': 'migrations.common'
 }

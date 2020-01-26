@@ -1,0 +1,5 @@
+#!/bin/bash
+set -xe
+cd ${SITE_ROOT}
+wait-for-it -t 60 0.0.0.0:80
+manage test tests/$@

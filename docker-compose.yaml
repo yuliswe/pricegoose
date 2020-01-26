@@ -1,4 +1,4 @@
-version: "2"
+version: "3.7"
 
 services:
   # db:
@@ -8,7 +8,9 @@ services:
   #     - 8432:5432
 
   site:
-    build: ./site
+    build:
+      context: ./site
+      shm_size: "128MB"
     restart: always
     hostname: site
     volumes:

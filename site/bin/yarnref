@@ -1,0 +1,6 @@
+#!/bin/bash
+set -xe
+cd ${NPM_PACKAGES_JSON_DIR}
+yarn install --dev --modules-folder ${UI_NODE_PATH} --pure-lockfile
+cd ${TEST_NPM_PACKAGES_JSON_DIR}
+yarn install --dev --modules-folder ${TEST_NODE_PATH} --pure-lockfile

@@ -1,7 +1,5 @@
-pytest
-requests
+requests # google auth dependency
 beautifulsoup4 # web crawler
-pylint-django>=2.0.13
 psycopg2-binary>=2.7.7,<3 # django dependency
 Django>=3,<4
 djangorestframework

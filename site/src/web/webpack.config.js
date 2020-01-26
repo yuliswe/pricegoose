@@ -10,15 +10,15 @@ module.exports = {
     library: 'app',
     libraryTarget: 'window',
     filename: '[name].js',
-    path: '/root/var/static/webpack'
+    path: '/root/var/static'
   },
   resolveLoader: {
-    modules: [ '/root/var/node_modules' ],
+    modules: [ process.env.UI_NODE_PATH ],
   },
   resolve: {
     modules: [
       '.',
-      '/root/var/node_modules',
+      process.env.UI_NODE_PATH,
     ],
     extensions: [ '.ts', '.js', '.scss', '.css' ]
   },
@@ -50,7 +50,7 @@ module.exports = {
             options: {
               name: '[name].[ext]',
               outputPath: 'assets',
-              publicPath: 'static/webpack/assets',
+              publicPath: 'static/assets',
             }
           }
         ]

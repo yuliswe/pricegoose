@@ -1,0 +1,4 @@
+#!/bin/bash
+set -xe
+cd ${SITE_ROOT}
+python3.8 -m pip install -r requirements.txt

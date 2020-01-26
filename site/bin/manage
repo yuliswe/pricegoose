@@ -1,2 +1,3 @@
 #!/bin/bash
-python3.7 ${SITE_ROOT}/manage.py $@
+set -xe
+python3.8 ${SITE_ROOT}/manage.py $@
