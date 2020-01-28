@@ -1,4 +1,5 @@
 #!/bin/bash
+set -xe
 scriptfile="$1"
 shift 1
-python3.7 ${SITE_ROOT}/manage.py runscript "$scriptfile" --script-args $@
+manage runscript "$scriptfile" --script-args $@

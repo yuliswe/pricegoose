@@ -1,0 +1,36 @@
+#!/usr/bin/env python3.8
+import click
+import os
+from subprocess import run
+from shutil import copy
+from pathlib import Path
+
+UI_NPM_JSON_PATH = Path(os.environ['UI_NPM_JSON_PATH'])
+TEST_NPM_JSON_PATH = Path(os.environ['TEST_NPM_JSON_PATH'])
+UI_NODE_MODULES_DIR = Path(os.environ['UI_NODE_MODULES_DIR'])
+TEST_NODE_MODULES_DIR = Path(os.environ['TEST_NODE_MODULES_DIR'])
+
+
+@click.command()
+@click.option('--ci', is_flag=True)
+@click.option('--ls', is_flag=True)
+def main(ci, ls):
+
+    for (npm_json_path, node_modules_path) in [
+        (UI_NPM_JSON_PATH, UI_NODE_MODULES_DIR),
+        (TEST_NPM_JSON_PATH, TEST_NODE_MODULES_DIR),
+    ]:
+        cwd = node_modules_path.parent
+        cwd.mkdir(parents=True)
+        copy(npm_json_path / 'package.json', cwd)
+        copy(npm_json_path / 'yarn.lock', cwd)
+        args = ['yarn', 'install', '--dev', '--modules-folder', node_modules_path]
+        if ci:
+            args += ['--frozen-lockfile', '--non-interactive']
+        run(args, cwd=cwd)
+        if ls:
+            run(['yarn', 'list'], cwd=node_modules_path)
+
+
+if __name__ == '__main__':
+    main()

@@ -10,6 +10,6 @@ class BaseView(generic.View):
         context.update({
             'site_logo': 'PriceGoose',
             'site_title': 'Track Lowest Price for Fashion & Electronics',
-            'app_js_url': f'webpack/{resolve(request.path).app_name}.js'
+            'app_js_url': resolve(self.request.path).namespaces[-1] + '.js',
         })
         return context

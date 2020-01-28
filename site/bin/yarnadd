@@ -1,0 +1,36 @@
+#!/usr/bin/env python3.8
+import click
+import os
+from subprocess import run
+from shutil import copy
+from pathlib import Path
+
+UI_NPM_JSON_PATH = Path(os.environ['UI_NPM_JSON_PATH'])
+TEST_NPM_JSON_PATH = Path(os.environ['TEST_NPM_JSON_PATH'])
+UI_NODE_MODULES_DIR = Path(os.environ['UI_NODE_MODULES_DIR'])
+TEST_NODE_MODULES_DIR = Path(os.environ['TEST_NODE_MODULES_DIR'])
+
+
+@click.command()
+@click.argument('type')
+@click.argument('packages', nargs=-1, required=True)
+def main(type, packages):
+    """
+    TYPE: ui or test
+
+    PACKAGES: node packages to install
+    """
+    (npm_json_path, node_modules_path) = {
+        'ui': (UI_NPM_JSON_PATH, UI_NODE_MODULES_DIR),
+        'test': (TEST_NPM_JSON_PATH, TEST_NODE_MODULES_DIR),
+    }[type]
+
+    cwd = node_modules_path.parent
+    cwd.mkdir(parents=True, exist_ok=True)
+    copy(npm_json_path / 'package.json', cwd)
+    copy(npm_json_path / 'yarn.lock', cwd)
+    run(['yarn', 'add', '--dev', '--modules-folder', node_modules_path] + list(packages), cwd=cwd)
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "allowJs": true,
+        "noEmit": true,
+        "baseUrl": ".",
+        "typeRoots": [
+            "tmp/npm/ui/node_modules/@types", // development only
+            "tmp/npm/test/node_modules/@types", // development only
+        ],
+        "paths": {
+            "*": [
+                "*",
+                "tmp/npm/test/node_modules/*", // development only
+                "tmp/npm/ui/node_modules/*", // development only
+                "tmp/npm/test/node_modules/@types/*", // development only
+                "tmp/npm/ui/node_modules/@types/*", // development only
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+    ],
+    "include": [
+        "**/*"
+    ]
+}

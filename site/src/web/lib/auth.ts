@@ -1,14 +1,14 @@
 import { URLs } from './base'
-import Cookies from 'js-cookie'
+import * as Cookies from 'js-cookie'
 import * as $ from "jquery"
 
 export class LoginAPI {
     public async viaGoogleToken() {
-        const google_auth:any = await new Promise(function(resolve, reject) {
+        const google_auth: any = await new Promise(function(resolve, reject) {
             window['gapi'].load('auth2', () => {
                 return resolve(window['gapi'].auth2.init())
             })
-        });
+        })
         const google_user = google_auth.currentUser.get()
         const id_token = google_user.getAuthResponse().id_token
         try {
@@ -22,9 +22,9 @@ export class LoginAPI {
                     'token': id_token,
                 },
             })
-        } catch(e) {
+        } catch (e) {
             console.error('bad login')
-            throw e;
+            throw e
         }
         finally {
             google_auth.signOut()

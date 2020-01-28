@@ -1,5 +1,5 @@
 import * as $ from "jquery"
-import Cookies from 'js-cookie'
+import * as Cookies from 'js-cookie'
 
 export type int = number
 export type id = number

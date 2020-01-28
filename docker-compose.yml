@@ -1,4 +1,4 @@
-version: "2"
+version: "3.7"
 
 services:
   # db:
@@ -8,10 +8,14 @@ services:
   #     - 8432:5432
 
   site:
-    build: ./site
+    build:
+      context: ./site
+      shm_size: "128MB"
     restart: always
     hostname: site
     volumes:
       - ./site:/root/site:ro
+      # - ./tmp:/root/tmp # development only, do not commit
     ports:
       - 8080:80
+      - 9222:9222
