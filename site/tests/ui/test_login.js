@@ -36,7 +36,7 @@ describe('Test google login (sequential)', () => {
         browser.waitUntil(() => browser.getWindowHandles().length == 1)
         browser.switchToWindow(browser.getWindowHandles()[0])
     })
-    it('observe login button disappears from nav bar', () => {
+    it('observe login button disappears from nav bar', function() {
         if (process.env.CI_RUN) {
             this.skip()
         }
