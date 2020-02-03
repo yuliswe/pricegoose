@@ -1,0 +1,4 @@
+#!/bin/bash
+set -xe
+cd ${WEBPACK_CONF_PATH}
+webpack-cli

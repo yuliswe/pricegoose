@@ -1,0 +1,26 @@
+#!/usr/bin/env python3.8
+from subprocess import run, Popen, CalledProcessError
+import os
+import click
+import sys
+
+
+SITE_ROOT = os.environ['SITE_ROOT']
+
+
+@click.command()
+@click.argument('relpath')
+def main(relpath):
+    """
+    RELPATH: relative path from site/tests to a directory containing tests,
+    for example, "runtest api"
+    """
+    Popen(['boot'])
+    run(['wait-for-it', '-t', '60', '0.0.0.0:80'], check=True)
+    proc = run(['manage', 'test', f'tests/{relpath}'])
+    if proc.returncode != 0:
+        sys.exit(f'Test failed, exited with {proc.returncode}')
+
+
+if __name__ == '__main__':
+    main()

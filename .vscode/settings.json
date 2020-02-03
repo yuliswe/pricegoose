@@ -1,0 +1,22 @@
+{
+    "git.inputValidationLength": 80,
+    "javascript.format.semicolons": "remove",
+    "javascript.format.insertSpaceAfterConstructor": true,
+    "javascript.preferences.quoteStyle": "single",
+    "typescript.format.semicolons": "remove",
+    "typescript.suggest.completeFunctionCalls": true,
+    "typescript.preferences.quoteStyle": "single",
+    "editor.formatOnSave": true,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+    "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+    "html.format.endWithNewline": true,
+    "files.insertFinalNewline": true,
+    "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+    "python.linting.banditEnabled": true,
+    "python.linting.pylintUseMinimalCheckers": false,
+    "python.linting.flake8Enabled": true,
+    "files.exclude": {
+        "**/node_modules": true
+    },
+}

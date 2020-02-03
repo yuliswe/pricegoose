@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
+set -xe
 service postgresql start
 wait-for-it localhost:5432
-python3.7 manage.py runserver --force-color 0.0.0.0:80
+manage runserver --force-color 0.0.0.0:80
+# runserver is expected to run forever
+# sleep for supervisord restart
 sleep 3
-exit 1 # runserver is expected to run forever
+exit 1

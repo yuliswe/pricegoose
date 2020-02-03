@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).parent
@@ -53,7 +54,7 @@ INSTALLED_APPS = [
     # https://www.django-rest-framework.org/
 ] + SITE_APPS
 
-MIGRATION_MODULES_ROOT = Path('/root/migrations')
+MIGRATION_MODULES_ROOT = Path(os.environ['MIGRATION_MODULE_DIR']) / 'migrations'
 MIGRATION_MODULES = {
     'common': 'migrations.common'
 }
@@ -77,10 +78,10 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'src.urls'
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/root/var/collectstatic'
+STATIC_ROOT = Path(os.environ['VAR_DIR']) / 'collectstatic'
 STATICFILES_DIRS = [
     BASE_DIR / 'web' / 'static',
-    '/root/var/static',
+    os.environ['WEBPACK_OUTPUT_DIR'],
 ]
 
 TEMPLATE_LIBS = {}
