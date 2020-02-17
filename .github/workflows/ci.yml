@@ -3,41 +3,37 @@ name: triggered continuous tests
 on: [push]
 
 jobs:
-    check-style:
-        runs-on: ubuntu-latest
-        timeout-minutes: 5
-        steps:
-            - uses: actions/checkout@v1
-            - uses: actions/setup-python@v1
-              with:
-                  python-version: 3.7
-            - name: Install dependencies
-              run: pip install flake8 pycodestyle
-            - name: Style check with flake8
-              working-directory: ./site
-              run: flake8 .
-            - name: Style check with pycodestyle
-              if: always()
-              working-directory: ./site
-              run: pycodestyle .
-    check-build:
-        runs-on: ubuntu-latest
-        timeout-minutes: 10
-        steps:
-            - uses: actions/checkout@v1
-            - name: Build container
-              run: docker-compose -f ci.dc.yml build ci
-            - name: Start server
-              run: docker-compose -f ci.dc.yml up -d ci
-            - name: Create database
-              run: |
-                  docker-compose -f ci.dc.yml exec -T ci createdb
-                  docker-compose -f ci.dc.yml exec -T ci manage makemigrations
-                  docker-compose -f ci.dc.yml exec -T ci manage showmigrations
-                  docker-compose -f ci.dc.yml exec -T ci manage migrate
-            - name: Run API tests
-              run: docker-compose -f ci.dc.yml exec -T ci runtest api
-            - name: Run UI tests
-              run: docker-compose -f ci.dc.yml exec -T ci runtest ui
-            - name: Stop server
-              run: docker-compose -f ci.dc.yml down -v
+  check-style:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Install dependencies
+        run: pip install flake8 pycodestyle
+      - name: Style check with flake8
+        working-directory: ./site
+        run: flake8 .
+  check-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build container
+        run: docker-compose -f dc.ci.yml build ci
+      - name: Start server
+        run: docker-compose -f dc.ci.yml up -d ci
+      - name: Create database
+        run: |
+          docker-compose -f dc.ci.yml exec -T ci createdb
+          docker-compose -f dc.ci.yml exec -T ci manage makemigrations
+          docker-compose -f dc.ci.yml exec -T ci manage showmigrations
+          docker-compose -f dc.ci.yml exec -T ci manage migrate
+      - name: Run API tests
+        run: docker-compose -f dc.ci.yml exec -T ci runtest api
+      - name: Run UI tests
+        run: docker-compose -f dc.ci.yml exec -T ci runtest ui
+      - name: Stop server
+        run: docker-compose -f dc.ci.yml down -v
