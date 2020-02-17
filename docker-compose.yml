@@ -21,7 +21,9 @@ services:
         build: ./db
         hostname: db
         ports:
-            - 8432:5432
+            - 8432:5432  
+        environment:
+            POSTGRES_PASSWORD: postgres
         networks:
             site-net:
                 aliases:
