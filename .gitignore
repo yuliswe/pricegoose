@@ -4,6 +4,9 @@
 # pycharm
 */.idea
 
+# VS Code
+.vscode/settings.json
+
 # vim
 *.swp
 

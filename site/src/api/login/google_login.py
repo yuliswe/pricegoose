@@ -73,10 +73,11 @@ def google_login(request, email, fname, lname, google_id):
             raise AttributeError
 
         # Update user info
+        google_user.user.username = email
         google_user.user.email = email
         google_user.user.first_name = fname
         google_user.user.last_name = lname
-        google_user.save()
+        google_user.user.save()
 
     # Send welcome email when user first created
     if is_created:
