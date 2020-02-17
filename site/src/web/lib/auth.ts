@@ -1,4 +1,4 @@
-import { URLs } from './base'
+import {URLs} from './base'
 import * as Cookies from 'js-cookie'
 import * as $ from "jquery"
 
@@ -12,7 +12,7 @@ export class LoginAPI {
         const google_user = google_auth.currentUser.get()
         const id_token = google_user.getAuthResponse().id_token
         try {
-            await $.ajax(URLs.LOGIN_VIA_GOOGLE, {
+            await $.ajax(URLs.LOGIN, {
                 method: 'POST',
                 dataType: 'json',
                 headers: {

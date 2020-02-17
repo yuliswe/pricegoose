@@ -1,4 +1,5 @@
-from .user import *  # noqa
-from .item import *  # noqa
-from .price import *  # noqa
-from .tag import *  # noqa
+from .user import *
+from .item import *
+from .price import *
+from .tag import *
+from django.db.models import *
