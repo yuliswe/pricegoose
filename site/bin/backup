@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -xe
+
+echo Backing up the container...
+echo db:5432:site:postgres:postgres > ~/.pgpass
+chmod 0600 ~/.pgpass
+
+mkdir -p "${VAR_DIR}"
+cd "${VAR_DIR}"
+timestemp="$(date '+%F_%H-%M')"
+pg_dump -U postgres -h db -p 5432 -w -Fc -f "${timestemp}" site
+mv "${timestemp}" "pg_dump-${timestemp}.done"

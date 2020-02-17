@@ -10,7 +10,7 @@ module.exports = {
         library: 'app',
         libraryTarget: 'window',
         filename: '[name].js',
-        path: path.join(process.env.VAR_DIR, 'static')
+        path: process.env.STATIC_FILES_DIR
     },
     resolveLoader: {
         modules: [process.env.UI_NODE_MODULES_DIR],
@@ -20,7 +20,7 @@ module.exports = {
             '.',
             process.env.UI_NODE_MODULES_DIR,
         ],
-        extensions: ['.ts', '.js', '.scss', '.css']
+        extensions: ['.ts', '.js']
     },
     mode: 'development',
     module: {
@@ -30,14 +30,15 @@ module.exports = {
                 use: {
                     loader: 'ts-loader',
                     options: {
+                        configFile: 'tsconfig.webpack.json',
                         onlyCompileBundledFiles: true,
                         compilerOptions: {
-                            "outDir": process.env.WEBPACK_OUTPUT_DIR,
                             "target": "ES6",
                             "moduleResolution": "node",
                             "sourceMap": true,
                             "allowJs": true,
                             "baseUrl": ".",
+                            "outDir": process.env.STATIC_FILES_DIR,
                             "typeRoots": [
                                 path.join(process.env.UI_NODE_MODULES_DIR, "@types"),
                                 path.join(process.env.TEST_NODE_MODULES_DIR, "@types"),
@@ -52,7 +53,6 @@ module.exports = {
                         }
                     }
                 }
-
             },
             {
                 test: /\.css$/i,
@@ -67,7 +67,7 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(woff(2)?|ttf|eot|svg|jpg|png|gif)(\?v=\d+\.\d+\.\d+)?$/,
+                test: /\.(woff(2)?|ttf|eot|svg|gif|jpg|png)(\?v=\d+\.\d+\.\d+)?$/,
                 use: [
                     {
                         loader: 'file-loader',
@@ -80,7 +80,5 @@ module.exports = {
                 ]
             }
         ],
-    },
-    plugins: [
-    ]
+    }
 }

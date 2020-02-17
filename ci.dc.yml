@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+    ci:
+        build:
+            context: ./site
+            shm_size: "128MB"
+        environment:
+            CI_RUN: 1
+        depends_on:
+            - ci-db
+        networks:
+            ci-net:
+
+    ci-db:
+        image: postgres
+        environment:
+            POSTGRES_PASSWORD: postgres
+        networks:
+            ci-net:
+                aliases:
+                    - db # host connected to from django
+
+networks:
+    ci-net:

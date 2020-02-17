@@ -2,6 +2,14 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from pathlib import Path
+
+
+def create_migration_dirs():
+    Path(os.environ['MIGRATION_MODULE_DIR']).mkdir(parents=True, exist_ok=True)
+    (Path(os.environ['MIGRATION_MODULE_DIR']) / '__init__.py').touch(exist_ok=True)
+    (Path(os.environ['MIGRATION_MODULE_DIR']) / 'common').mkdir(parents=True, exist_ok=True)
+    (Path(os.environ['MIGRATION_MODULE_DIR']) / 'common' / '__init__.py').touch(exist_ok=True)
 
 
 def main():
@@ -14,6 +22,7 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
+    create_migration_dirs()
     execute_from_command_line(sys.argv)
 
 

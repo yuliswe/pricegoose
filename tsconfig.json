@@ -7,16 +7,16 @@
         "noEmit": true,
         "baseUrl": ".",
         "typeRoots": [
-            "tmp/npm/ui/node_modules/@types", // development only
+            "tmp/npm/web/node_modules/@types", // development only
             "tmp/npm/test/node_modules/@types", // development only
         ],
         "paths": {
             "*": [
-                "*",
+                "site/src/web/*",
                 "tmp/npm/test/node_modules/*", // development only
-                "tmp/npm/ui/node_modules/*", // development only
+                "tmp/npm/web/node_modules/*", // development only
                 "tmp/npm/test/node_modules/@types/*", // development only
-                "tmp/npm/ui/node_modules/@types/*", // development only
+                "tmp/npm/web/node_modules/@types/*", // development only
             ]
         }
     },
