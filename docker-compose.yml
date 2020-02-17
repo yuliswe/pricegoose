@@ -11,6 +11,7 @@ services:
         volumes:
             - ./site:/root/site:ro
             - ./tmp:/root/tmp:delegated
+            - ./var:/root/var:delegated
         ports:
             - 8080:80
             - 9222:9222
@@ -21,9 +22,11 @@ services:
         build: ./db
         hostname: db
         ports:
-            - 8432:5432  
+            - 8432:5432
         environment:
             POSTGRES_PASSWORD: postgres
+        volumes:
+            - db-vol:/var/lib/postgresql/data:delegated
         networks:
             site-net:
                 aliases:
