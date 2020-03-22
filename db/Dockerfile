@@ -5,7 +5,7 @@ ENV LANG C.UTF-8
 ENV LANGUAGE C.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update --fix-missing
+RUN apt-get update -y --fix-missing
 RUN apt-get install -y libpq-dev postgresql postgresql-contrib
 RUN apt-get install -y wait-for-it
 
