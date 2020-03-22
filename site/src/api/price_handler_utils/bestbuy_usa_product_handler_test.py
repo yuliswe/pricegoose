@@ -1,6 +1,5 @@
 from django.test import SimpleTestCase
 from .bestbuy_usa_product_handler import BestbuyUSAProductHandler
-#from ..url_utils.url_parser import UrlParser
 
 
 class BestBuyUSAProductHandlerTest(SimpleTestCase):
