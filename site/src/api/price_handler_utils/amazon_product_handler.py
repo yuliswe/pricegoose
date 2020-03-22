@@ -14,4 +14,3 @@ class AmazonProductHandler(BaseProductHandler):
     @overrides(BaseProductHandler)
     def get_info(url_info):
         pass  # TODO need to use amazon API
-
