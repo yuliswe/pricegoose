@@ -1,5 +1,3 @@
-import requests
-from bs4 import BeautifulSoup
 from ipromise import overrides
 
 from .base_product_handler import BaseProductHandler
