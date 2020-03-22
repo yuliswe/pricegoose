@@ -1,7 +1,5 @@
 import requests
 import json
-from ipromise import overrides
-from .base_product_handler import BaseProductHandler
 from urllib.parse import parse_qs, urlparse
 
 # test for website layout no change & money format no change
@@ -25,7 +23,7 @@ class BestbuyUSAProductHandler():
 
         name = info["name"]
         salePrice = info["salePrice"]
-        regularPrice = info["regularPrice"]
+        # regularPrice = info["regularPrice"]
         image = info["image"]
 
-        return Product(name, price, image)
+        return Product(name, salePrice, image)
