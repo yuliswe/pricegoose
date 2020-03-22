@@ -1,0 +1,4 @@
+#!/bin/bash
+manage graph_models -a \
+    -X Abstract*,Session,Permission,Group,ContentType \
+    -o ${SHARE_DIR}/models.png

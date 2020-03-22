@@ -1,9 +1,10 @@
 #!/usr/bin/env python3.8
-import click
 import os
-from subprocess import run
-from shutil import copy
 from pathlib import Path
+from shutil import copy
+from subprocess import run
+
+import click
 
 UI_NPM_JSON_PATH = Path(os.environ['UI_NPM_JSON_PATH'])
 TEST_NPM_JSON_PATH = Path(os.environ['TEST_NPM_JSON_PATH'])
@@ -21,9 +22,12 @@ def main(ci, ls):
         (TEST_NPM_JSON_PATH, TEST_NODE_MODULES_DIR),
     ]:
         cwd = node_modules_path.parent
-        cwd.mkdir(parents=True)
-        copy(npm_json_path / 'package.json', cwd)
-        copy(npm_json_path / 'yarn.lock', cwd)
+        cwd.mkdir(parents=True, exist_ok=True)
+        package_file = npm_json_path / 'package.json'
+        yarn_file = npm_json_path / 'yarn.lock'
+        copy(package_file, cwd)
+        if yarn_file.exists():
+            copy(yarn_file, cwd)
         args = ['yarn', 'install', '--dev', '--modules-folder', node_modules_path]
         if ci:
             args += ['--frozen-lockfile', '--non-interactive']

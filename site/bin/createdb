@@ -1,0 +1,9 @@
+#!/bin/bash
+set -xe
+echo db:5432:postgres:postgres:postgres > ~/.pgpass
+chmod 0600 ~/.pgpass
+wait-for-it -t 60 db:5432
+psql -U postgres -h db -p 5432 -w <<EOF
+CREATE DATABASE site WITH ENCODING 'UTF-8' OWNER "postgres";
+GRANT ALL PRIVILEGES ON DATABASE site TO postgres;
+EOF

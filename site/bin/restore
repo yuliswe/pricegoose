@@ -1,0 +1,6 @@
+#/bin/bash
+set -xe
+echo Backing up the container...
+echo db:5432:site:postgres:postgres > ~/.pgpass
+chmod 0600 ~/.pgpass
+pg_restore -U postgres -d site -h db "$@"

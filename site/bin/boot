@@ -1,9 +1,17 @@
-#!/usr/bin/env bash
-set -xe
-service postgresql start
-wait-for-it localhost:5432
-manage runserver --force-color 0.0.0.0:80
-# runserver is expected to run forever
-# sleep for supervisord restart
-sleep 3
-exit 1
+#!/usr/bin/env python3.8
+from subprocess import run
+
+import click
+
+
+@click.command()
+@click.option('--createdb', is_flag=True, default=False)
+def main(createdb):
+    run(['wait-for-it', '-t', '60', 'db:5432'], check=True)
+    if createdb:
+        run(['createdb'], check=True)
+    run(['manage', 'runserver', '0.0.0.0:80'], check=True)
+
+
+if __name__ == '__main__':
+    main()
