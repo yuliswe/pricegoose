@@ -15,4 +15,3 @@ class UrlParser:
         nation = netloc[2]
         url_info = UrlInfo(url, company, nation)
         return url_info
-
