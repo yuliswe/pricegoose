@@ -16,4 +16,3 @@ class UrlParser:
         url_info = UrlInfo(url, company, nation)
         return url_info
 
-
